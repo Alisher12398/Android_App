@@ -7,8 +7,6 @@ import com.android.android_app.R
 import android.view.View
 
 
-var fTrans: FragmentTransaction? = null
-
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

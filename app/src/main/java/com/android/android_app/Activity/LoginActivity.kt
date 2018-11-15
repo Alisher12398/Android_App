@@ -73,8 +73,11 @@ class LoginActivity : BaseActivity() {
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "createUserWithEmail:success")
-                        val user = auth.currentUser
-                        val toast = Toast.makeText(this, "User : ${user!!.email} is created", Toast.LENGTH_LONG).show()
+                        //val user = auth.currentUser
+                        //val toast = Toast.makeText(this, "User : ${user!!.email} is created", Toast.LENGTH_LONG).show()
+
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "createUserWithEmail:failure", task.exception)
@@ -103,10 +106,10 @@ class LoginActivity : BaseActivity() {
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithEmail:success")
-                        val user = auth.currentUser
+                        //val user = auth.currentUser
 
-                        //val intent = Intent(this, IOActivity::class.java)
-                        //startActivity(intent)
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
 
                     } else {
                         // If sign in fails, display a message to the user.
