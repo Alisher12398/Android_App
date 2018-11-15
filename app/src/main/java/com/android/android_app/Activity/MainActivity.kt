@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         /*val adapter = PageAdapter(getSupportFragmentManager())
         pager.adapter = adapter*/
+        //
 
     }
 
