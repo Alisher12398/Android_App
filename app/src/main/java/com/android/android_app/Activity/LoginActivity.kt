@@ -78,6 +78,7 @@ class LoginActivity : BaseActivity() {
 
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
+                        finish()
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "createUserWithEmail:failure", task.exception)
@@ -110,6 +111,7 @@ class LoginActivity : BaseActivity() {
 
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
+                        finish()
 
                     } else {
                         // If sign in fails, display a message to the user.
