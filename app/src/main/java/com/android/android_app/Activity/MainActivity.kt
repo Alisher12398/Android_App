@@ -1,10 +1,15 @@
 package com.android.android_app.Activity
 
 import android.app.FragmentTransaction
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import com.android.android_app.R
 import android.view.View
+import android.widget.Toast
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +21,21 @@ class MainActivity : AppCompatActivity() {
         /*val adapter = PageAdapter(getSupportFragmentManager())
         pager.adapter = adapter*/
         //
+
+    }
+
+    var oneOnBackPressed = false
+    private var back_pressed: Long = 0
+    override fun onBackPressed() {
+
+       /*
+        Handler().postDelayed({
+            oneOnBackPressed = false
+        }, 2000)*/
+
+        if (back_pressed + 2000 > System.currentTimeMillis()) super.onBackPressed()
+        else Toast.makeText(this, "Нажмите еще раз 'Назад' для выхода", Toast.LENGTH_LONG).show()
+        back_pressed = System.currentTimeMillis()
 
     }
 
