@@ -1,12 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.MainActivity">
+    tools:context=".activity.MainActivity"
+    >
 
-    <android.support.v4.view.ViewPager
+
+
+
+    <!--<android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/toolbar"
+        android:background="@color/colorMenu"
+        app:layout_constraintBottom_toTopOf="@id/tabs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed">
+
+        <ImageView
+            android:id="@+id/toolbar_image_1"
+            android:layout_width="27dp"
+            android:layout_marginTop="2dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/menu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/toolbar2"
+            android:layout_marginLeft="10dp"
+            />
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar2"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorMenu"
+
+            app:layout_constraintEnd_toStartOf="@id/toolbar_image_2"
+            app:layout_constraintStart_toEndOf="@id/toolbar_image_1"
+
+            app:title="@string/app_name"
+            app:titleTextColor="@color/colorWhite">
+        </android.support.v7.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/toolbar_image_2"
+            android:layout_width="27dp"
+            android:layout_marginTop="2dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/magnify"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/toolbar2"
+            android:layout_marginRight="20dp"
+            />
+
+
+    </android.support.constraint.ConstraintLayout>-->
+    <!--<android.support.v4.view.ViewPager
         android:id="@+id/activity.main.pager.pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -17,7 +71,7 @@
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         >
-    </android.support.v4.view.ViewPager>
+    </android.support.v4.view.ViewPager>-->
 
     <!--<android.support.constraint.Group
         android:id="@+id/activity.main.group.bottom.group"

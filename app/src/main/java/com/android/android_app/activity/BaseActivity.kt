@@ -1,13 +1,11 @@
-package com.android.android_app.Activity
+package com.android.android_app.activity
 
-import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Context
 import android.support.annotation.VisibleForTesting
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import com.android.android_app.R
 
 open class BaseActivity : AppCompatActivity() {
 
