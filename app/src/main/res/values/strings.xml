@@ -2,4 +2,39 @@
     <string name="app_name">Android_App</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Fragment titles-->
+    <string name="main_activity_fragment_title_foods">Recipes</string>
+    <string name="main_activity_fragment_title_favorites">Favorites</string>
+    <string name="main_activity_fragment_title_main">Main</string>
+    <string name="main_activity_fragment_title_cart">Cart</string>
+    <string name="main_activity_fragment_title_settings">Settings</string>
+
+    <!--
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    <string name=""></string>
+    -->
 </resources>
