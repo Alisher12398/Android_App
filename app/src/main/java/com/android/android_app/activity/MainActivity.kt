@@ -1,8 +1,11 @@
 package com.android.android_app.activity
 
+import android.annotation.SuppressLint
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.internal.BottomNavigationItemView
 import android.support.design.internal.BottomNavigationMenu
+import android.support.design.internal.BottomNavigationMenuView
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
@@ -19,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         val bottom_navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottom_navigation.selectedItemId = R.id.action_fragment_main
-
+        bottom_navigation.disableShiftMode()
 
         val cartFragment : Fragment = CartFragment()
         val favoritesFragment : Fragment = FavoritesFragment()
@@ -87,5 +90,26 @@ class MainActivity : AppCompatActivity() {
         else Toast.makeText(this, "Нажмите еще раз 'Назад' для выхода", Toast.LENGTH_LONG).show()
         back_pressed = System.currentTimeMillis()
 
+    }
+
+    @SuppressLint("RestrictedApi")
+    fun BottomNavigationView.disableShiftMode() {
+        val menuView = getChildAt(0) as BottomNavigationMenuView
+        try {
+            val shiftingMode = menuView::class.java.getDeclaredField("mShiftingMode")
+            shiftingMode.isAccessible = true
+            shiftingMode.setBoolean(menuView, false)
+            shiftingMode.isAccessible = false
+            for (i in 0 until menuView.childCount) {
+                val item = menuView.getChildAt(i) as BottomNavigationItemView
+                item.setShiftingMode(false)
+                // set once again checked value, so view will be updated
+                item.setChecked(item.itemData.isChecked)
+            }
+        } catch (e: NoSuchFieldException) {
+
+        } catch (e: IllegalStateException) {
+
+        }
     }
 }
