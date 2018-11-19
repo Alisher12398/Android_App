@@ -37,13 +37,12 @@ class MainActivity : AppCompatActivity() {
         //transaction_mainFragment.commit()
 
         supportFragmentManager.beginTransaction().add(R.id.frame_layout, mainFragment).commit()
-        supportFragmentManager.beginTransaction().add(R.id.frame_layout, foodsFragment).commit()
-        supportFragmentManager.beginTransaction().add(R.id.frame_layout, favoritesFragment).commit()
-        supportFragmentManager.beginTransaction().add(R.id.frame_layout, cartFragment).commit()
-        supportFragmentManager.beginTransaction().add(R.id.frame_layout, settingsFragment).commit()
+        supportFragmentManager.beginTransaction().add(R.id.frame_layout, foodsFragment).hide(foodsFragment).commit()
+        supportFragmentManager.beginTransaction().add(R.id.frame_layout, favoritesFragment).hide(favoritesFragment).commit()
+        supportFragmentManager.beginTransaction().add(R.id.frame_layout, cartFragment).hide(cartFragment).commit()
+        supportFragmentManager.beginTransaction().add(R.id.frame_layout, settingsFragment).hide(settingsFragment).commit()
 
         var active = mainFragment
-        var selectedFragment: Fragment? = null
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_fragment_foods -> {
