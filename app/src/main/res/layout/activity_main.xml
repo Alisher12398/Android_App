@@ -7,6 +7,21 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_main_activity"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorMenu"
+
+        app:title="Рецепты"
+        app:titleTextColor="@color/colorWhite"
+
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/frame_layout"
+        >
+
+    </android.support.v7.widget.Toolbar>
 
 
     <FrameLayout
@@ -17,7 +32,7 @@
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_main_activity"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
 
         >

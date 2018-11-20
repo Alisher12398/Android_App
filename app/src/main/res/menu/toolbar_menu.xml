@@ -5,11 +5,10 @@
 
     <item
         android:title=""
-        android:id="@+id/action_search"
+        android:id="@+id/action_search2"
         app:showAsAction="always"
         android:icon="@drawable/baseline_search_white_36"
-
         >
-
     </item>
+
 </menu>

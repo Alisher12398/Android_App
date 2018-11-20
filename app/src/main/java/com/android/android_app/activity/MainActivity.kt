@@ -7,7 +7,11 @@ import android.support.design.internal.BottomNavigationItemView
 import android.support.design.internal.BottomNavigationMenuView
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.view.Gravity
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
+import android.widget.Toolbar
 import com.android.android_app.Fragments.Main.*
 import com.android.android_app.R
 
@@ -21,12 +25,14 @@ class MainActivity : AppCompatActivity() {
         bottom_navigation.selectedItemId = R.id.action_fragment_main
         bottom_navigation.disableShiftMode()
 
+        //https://www.youtube.com/watch?v=C0D7zzIUBec
+
+        val toolbar = findViewById<android.support.v7.widget.Toolbar>(R.id.toolbar_main_activity)
         val cartFragment : Fragment = CartFragment()
         val favoritesFragment : Fragment = FavoritesFragment()
         val foodsFragment : Fragment = FoodsFragment()
         val mainFragment : Fragment = MainFragment()
         val settingsFragment : Fragment = SettingsFragment()
-
 
         /*val transaction_mainFragment : FragmentTransaction = supportFragmentManager.beginTransaction().replace(R.id.frame_layout, mainFragment)
         val transaction_foodsFragment : FragmentTransaction = supportFragmentManager.beginTransaction().replace(R.id.frame_layout, foodsFragment)
@@ -35,6 +41,10 @@ class MainActivity : AppCompatActivity() {
         val transaction_settingsFragment : FragmentTransaction = supportFragmentManager.beginTransaction().replace(R.id.frame_layout, settingsFragment)*/
         //transaction.replace(R.id.frame_layout, selectedFragment)
         //transaction_mainFragment.commit()
+
+        setSupportActionBar(toolbar)
+        toolbar.setTitle(R.string.main_activity_fragment_title_main)
+
 
         supportFragmentManager.beginTransaction().add(R.id.frame_layout, mainFragment).commit()
         supportFragmentManager.beginTransaction().add(R.id.frame_layout, foodsFragment).hide(foodsFragment).commit()
@@ -48,22 +58,28 @@ class MainActivity : AppCompatActivity() {
                 R.id.action_fragment_foods -> {
                     supportFragmentManager.beginTransaction().hide(active).show(foodsFragment).commit()
                     active = foodsFragment
+                    toolbar.setTitle(R.string.main_activity_fragment_title_foods)
+
                 }
                 R.id.action_fragment_favorites -> {
                     supportFragmentManager.beginTransaction().hide(active).show(favoritesFragment).commit()
                     active = favoritesFragment
+                    toolbar.setTitle(R.string.main_activity_fragment_title_favorites)
                 }
                 R.id.action_fragment_main -> {
                     supportFragmentManager.beginTransaction().hide(active).show(mainFragment).commit()
                     active = mainFragment
+                    toolbar.setTitle(R.string.main_activity_fragment_title_main)
                 }
                 R.id.action_fragment_cart -> {
                     supportFragmentManager.beginTransaction().hide(active).show(cartFragment).commit()
                     active = cartFragment
+                    toolbar.setTitle(R.string.main_activity_fragment_title_cart)
                 }
                 R.id.action_fragment_settings -> {
                     supportFragmentManager.beginTransaction().hide(active).show(settingsFragment).commit()
                     active = settingsFragment
+                    toolbar.setTitle(R.string.main_activity_fragment_title_settings)
                 }
             }
             return@setOnNavigationItemSelectedListener true
@@ -108,5 +124,20 @@ class MainActivity : AppCompatActivity() {
         } catch (e: IllegalStateException) {
 
         }
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.action_search2){
+            val toast = Toast.makeText(this, "Text", Toast.LENGTH_SHORT)
+            toast.setGravity(Gravity.BOTTOM, 0, 150)
+            toast.show()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

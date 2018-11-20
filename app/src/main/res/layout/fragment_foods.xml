@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.Main.FoodsFragment">
 
-    <android.support.v7.widget.Toolbar
+    <!--<android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_foods_fragment"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -15,6 +15,6 @@
         app:title="Рецепты"
         app:titleTextColor="@color/colorWhite">
 
-    </android.support.v7.widget.Toolbar>
+    </android.support.v7.widget.Toolbar>-->
 
 </android.support.constraint.ConstraintLayout>

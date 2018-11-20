@@ -4,30 +4,52 @@ package com.android.android_app.Fragments.Main
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.Toolbar
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-
+import android.view.*
+import android.widget.Toast
 import com.android.android_app.R
-import kotlinx.android.synthetic.*
+import android.support.v7.app.AppCompatActivity
+
+
 
 class FoodsFragment : Fragment() {
 
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+       /* val toolbar = view?.findViewById<Toolbar>(R.id.toolbar_foods_fragment)
+        setHasOptionsMenu(true)*/
 
         val view = inflater.inflate(R.layout.fragment_foods, container, false)
-        val toolbar = view.findViewById<Toolbar>(R.id.toolbar_foods_fragment)
 
+        val toolbar = activity?.findViewById<android.support.v7.widget.Toolbar>(R.id.toolbar_main_activity)
+
+        //(activity as AppCompatActivity).supportActionBar?.hide()
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
         return view
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.action_search2 ){
+            Toast.makeText(activity, "Text2", Toast.LENGTH_SHORT).show()
+
+        }
+       if (item?.itemId == R.id.action_search3 ){
+           Toast.makeText(activity, "Text4", Toast.LENGTH_SHORT).show()
+
+       }
+       if (item?.itemId == R.id.action_search4 ){
+           Toast.makeText(activity, "Text4", Toast.LENGTH_SHORT).show()
+
+       }
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        inflater?.inflate(R.menu.toolbar_menu_2, menu)
+        //(activity as AppCompatActivity).menuInflater.inflate(R.menu.toolbar_menu_2, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
 
 }
