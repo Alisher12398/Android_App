@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         toolbar.setTitle(R.string.main_activity_fragment_title_main)
-
+        //toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_white_36)
 
         supportFragmentManager.beginTransaction().add(R.id.frame_layout, mainFragment).commit()
         supportFragmentManager.beginTransaction().add(R.id.frame_layout, foodsFragment).hide(foodsFragment).commit()
