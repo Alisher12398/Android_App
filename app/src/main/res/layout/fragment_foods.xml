@@ -6,15 +6,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.Main.FoodsFragment">
 
-    <!--<android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_foods_fragment"
+    <GridView
+        android:id="@+id/fragment_foods_gridview"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorMenu"
+        android:layout_height="match_parent"
+        android:numColumns="2"
 
-        app:title="Рецепты"
-        app:titleTextColor="@color/colorWhite">
+        >
 
-    </android.support.v7.widget.Toolbar>-->
+    </GridView>
+
+
 
 </android.support.constraint.ConstraintLayout>

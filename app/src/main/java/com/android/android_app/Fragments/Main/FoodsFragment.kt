@@ -8,25 +8,25 @@ import android.view.*
 import android.widget.Toast
 import com.android.android_app.R
 import android.support.v7.app.AppCompatActivity
-
+import com.android.android_app.Adapter.Fragment_Foods_GridView_Adapter
+import com.android.android_app.model.Food_Model
+import kotlinx.android.synthetic.main.fragment_foods.*
+import android.widget.GridView
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
 
 
 class FoodsFragment : Fragment() {
 
 
+    var adapter: Fragment_Foods_GridView_Adapter? = null
+    var foodsList = ArrayList<Food_Model>()
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-       /* val toolbar = view?.findViewById<Toolbar>(R.id.toolbar_foods_fragment)
-        setHasOptionsMenu(true)*/
-
         val view = inflater.inflate(R.layout.fragment_foods, container, false)
 
-        //val toolbar = activity?.findViewById<android.support.v7.widget.Toolbar>(R.id.toolbar_main_activity)
-
-       // toolbar?.menu?.clear()
-        //(activity as AppCompatActivity).supportActionBar?.hide()
-        //(activity as AppCompatActivity).setSupportActionBar(toolbar)
         return view
 
     }
