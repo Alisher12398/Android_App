@@ -22,15 +22,16 @@ class FoodsFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_foods, container, false)
 
-        val toolbar = activity?.findViewById<android.support.v7.widget.Toolbar>(R.id.toolbar_main_activity)
+        //val toolbar = activity?.findViewById<android.support.v7.widget.Toolbar>(R.id.toolbar_main_activity)
 
+       // toolbar?.menu?.clear()
         //(activity as AppCompatActivity).supportActionBar?.hide()
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        //(activity as AppCompatActivity).setSupportActionBar(toolbar)
         return view
 
     }
 
-   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+   /*override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.action_search2 ){
             Toast.makeText(activity, "Text2", Toast.LENGTH_SHORT).show()
 
@@ -50,6 +51,6 @@ class FoodsFragment : Fragment() {
         inflater?.inflate(R.menu.toolbar_menu_2, menu)
         //(activity as AppCompatActivity).menuInflater.inflate(R.menu.toolbar_menu_2, menu)
         super.onCreateOptionsMenu(menu, inflater)
-    }
+    }*/
 
 }

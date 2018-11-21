@@ -59,6 +59,8 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction().hide(active).show(foodsFragment).commit()
                     active = foodsFragment
                     toolbar.setTitle(R.string.main_activity_fragment_title_foods)
+                    toolbar.menu.clear()
+                    toolbar.inflateMenu(R.menu.toolbar_menu_2)
 
                 }
                 R.id.action_fragment_favorites -> {
