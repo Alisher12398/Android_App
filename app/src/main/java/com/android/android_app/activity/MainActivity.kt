@@ -30,12 +30,6 @@ class MainActivity : AppCompatActivity() {
         myRef.setValue("Hello, World!");
 
 
-
-
-
-
-
-
         val bottom_navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottom_navigation.selectedItemId = R.id.action_fragment_main
         bottom_navigation.disableShiftMode()
@@ -76,35 +70,45 @@ class MainActivity : AppCompatActivity() {
                     toolbar.setTitle(R.string.main_activity_fragment_title_foods)
                     toolbar.menu.clear()
                     toolbar.inflateMenu(R.menu.toolbar_menu_2)
+                    toolbar.setBackgroundColor(resources.getColor(R.color.colorMenu))
 
                 }
                 R.id.action_fragment_favorites -> {
                     supportFragmentManager.beginTransaction().hide(active).show(favoritesFragment).commit()
                     active = favoritesFragment
                     toolbar.setTitle(R.string.main_activity_fragment_title_favorites)
+                    toolbar.menu.clear()
+                    toolbar.inflateMenu(R.menu.toolbar_menu)
+                    toolbar.setBackgroundColor(resources.getColor(R.color.colorMenu))
                 }
                 R.id.action_fragment_main -> {
                     supportFragmentManager.beginTransaction().hide(active).show(mainFragment).commit()
                     active = mainFragment
                     toolbar.setTitle(R.string.main_activity_fragment_title_main)
+                    toolbar.menu.clear()
+                    toolbar.inflateMenu(R.menu.toolbar_menu)
+                    toolbar.setBackgroundColor(resources.getColor(R.color.colorMenu))
                 }
                 R.id.action_fragment_cart -> {
                     supportFragmentManager.beginTransaction().hide(active).show(cartFragment).commit()
                     active = cartFragment
                     toolbar.setTitle(R.string.main_activity_fragment_title_cart)
+                    toolbar.menu.clear()
+                    toolbar.inflateMenu(R.menu.toolbar_menu)
+                    toolbar.setBackgroundColor(resources.getColor(R.color.colorMenu))
                 }
                 R.id.action_fragment_settings -> {
                     supportFragmentManager.beginTransaction().hide(active).show(settingsFragment).commit()
                     active = settingsFragment
                     toolbar.setTitle(R.string.main_activity_fragment_title_settings)
+                    toolbar.menu.clear()
+                    toolbar.setBackgroundColor(resources.getColor(R.color.black))
                 }
             }
             return@setOnNavigationItemSelectedListener true
         }
 
     }
-
-
 
     var oneOnBackPressed = false
     private var back_pressed: Long = 0

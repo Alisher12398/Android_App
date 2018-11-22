@@ -1,11 +1,17 @@
 package com.android.android_app.model
 
-class Food_Model(name: String) {
+class Food_Model{
     var text: String = ""
-    //var drawable: Int = 0
+    var image: Int = 0
 
-    fun Food_Model(t: String) {
-        text = t
-        //drawable = d
+    constructor(text: String, image: Int){
+        this.text=text
+        this.image=image
     }
+    constructor(){}
+
+    fun getImageUrl(): Int{
+        return image
+    }
+
 }

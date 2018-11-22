@@ -1,50 +1,75 @@
 package com.android.android_app.Fragments.Main
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.*
-import com.android.android_app.Adapter.RecyclerViewGridAdapter
+import android.widget.TextView
+import android.widget.Toast
+import com.android.android_app.Adapter.RecyclerTouchListener
+import com.android.android_app.Adapter.RecyclerViewGridAdapter2
 import com.android.android_app.R
 import com.android.android_app.model.Food_Model
 
 
 class FoodsFragment : Fragment() {
 
-    var foodsList = ArrayList<Food_Model>()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_foods, container, false)
 
-        foodsList.add(Food_Model("Test"))
-        foodsList.add(Food_Model("Test"))
-        foodsList.add(Food_Model("Test"))
-        foodsList.add(Food_Model("Test"))
-        foodsList.add(Food_Model("Test"))
-        foodsList.add(Food_Model("Test"))
-        foodsList.add(Food_Model("Test2"))
-        foodsList.add(Food_Model("Test"))
-        foodsList.add(Food_Model("Test"))
-        foodsList.add(Food_Model("Test"))
-        foodsList.add(Food_Model("Test"))
-        foodsList.add(Food_Model("Test"))
+        val foodsList = ArrayList<Food_Model>()
+
+        val a : String = "Test"
+        /*foodsList.add(Food_Model(a, R.drawable.i1))
+        foodsList.add(Food_Model(a, R.drawable.i1))
+        foodsList.add(Food_Model(a, R.drawable.i1))
+        foodsList.add(Food_Model(a, R.drawable.i1))
+        foodsList.add(Food_Model(a, R.drawable.i1))
+        foodsList.add(Food_Model(a, R.drawable.i1))
+        foodsList.add(Food_Model(a, R.drawable.i1))
+        foodsList.add(Food_Model(a, R.drawable.i1))
+        foodsList.add(Food_Model(a, R.drawable.i1))
+        foodsList.add(Food_Model(a, R.drawable.i1))
+        foodsList.add(Food_Model(a, R.drawable.i1))
+        foodsList.add(Food_Model(a, R.drawable.i1))*/
+
+        for (i in 1..10){
+            val food = Food_Model()
+            food.text="Test$i"
+            food.image=R.drawable.i1
+            foodsList.add(food)
+
+        }
 
 
-        var adapter2 = RecyclerViewGridAdapter(foodsList)
+        val adapter = RecyclerViewGridAdapter2(foodsList)
 
-        val recycler = view.findViewById(R.id.recyclerView) as RecyclerView
+        val recycler: RecyclerView = view.findViewById(R.id.recycle_view_fragment_foods)
 
-        recycler.adapter = adapter2
+        recycler.layoutManager = GridLayoutManager(context, 2)
+        recycler.adapter = adapter
 
-        recycler.layoutManager = GridLayoutManager(activity, 2)
+        recycler.addOnItemTouchListener(RecyclerTouchListener(getActivity()!!.getApplicationContext(), recycler, object : RecyclerTouchListener.ClickListener {
+            override fun onClick(view: View, position: Int) {
+                Toast.makeText(activity, "Click : $position", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onLongClick(view: View?, position: Int) {
+                Toast.makeText(activity, "LongPress : $position", Toast.LENGTH_SHORT).show()
+            }
+        }))
 
         return view
-
     }
+
+
 
    /*override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.action_search2 ){
