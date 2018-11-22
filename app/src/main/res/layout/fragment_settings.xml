@@ -32,8 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/button_fragment_settings"
-        app:layout_constraintVertical_chainStyle="packed">
+        app:layout_constraintBottom_toTopOf="@id/button_fragment_settings">
 
         <TextView
             android:id="@+id/textview_fragment_settings"
@@ -56,9 +55,10 @@
         android:text="Exit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="card_fragment_settings"
+
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="20dp"
+
         />
 
 

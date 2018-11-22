@@ -1,6 +1,7 @@
 package com.android.android_app.Fragments.Main
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.Button
 import android.widget.TextView
 
 import com.android.android_app.R
+import com.android.android_app.activity.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -26,6 +28,12 @@ class SettingsFragment : Fragment() {
         val currentUser = auth.currentUser
 
         textview_fragment_settings.text = "Hello, ${currentUser?.email}"
+
+        button_fragment_settings.setOnClickListener{
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(activity, LoginActivity::class.java)
+            startActivity(intent)
+        }
 
         return view
     }
