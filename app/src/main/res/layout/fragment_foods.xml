@@ -6,16 +6,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.Main.FoodsFragment">
 
-    <GridView
-        android:id="@+id/fragment_foods_gridview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:numColumns="2"
 
-        >
-
-    </GridView>
-
-
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </android.support.constraint.ConstraintLayout>
