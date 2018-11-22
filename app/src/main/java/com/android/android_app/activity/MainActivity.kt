@@ -14,12 +14,27 @@ import android.widget.Toast
 import android.widget.Toolbar
 import com.android.android_app.Fragments.Main.*
 import com.android.android_app.R
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+
+
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("message")
+        myRef.setValue("Hello, World!");
+
+
+
+
+
+
+
 
         val bottom_navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottom_navigation.selectedItemId = R.id.action_fragment_main
