@@ -21,48 +21,35 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.util.*
+import kotlin.collections.HashMap
 
 
 class FoodsFragment : Fragment() {
 
+    var myRef = FirebaseDatabase.getInstance().reference
 
-
-    var database = FirebaseDatabase.getInstance()
-    var myRef = database.reference
     var reference_category = myRef.child("category")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_foods, container, false)
 
-        val testtext : TextView = view.findViewById(R.id.testtext)
         val foodsList = ArrayList<Food_Model>()
 
-        val testlist = ArrayList<String>()
-        val hm : HashMap<String, Boolean> = HashMap()
-        hm.put("Key1", true)
-        hm.put("Key2", true)
-        hm.put("Key3", false)
-        var t=1
         reference_category.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                val td = dataSnapshot.value as HashMap<String, Objects>
-                for ((key, value) in td) {
-                    testlist.add(key)
+                foodsList.clear()
+                for (postSnapshot in dataSnapshot.children) {
+                    val food : Food_Model = postSnapshot.getValue(Food_Model::class.java)!!
+
+                    when(postSnapshot.key){
+                        "category1" -> food.image=R.drawable.category1
+                        "category2" -> food.image=R.drawable.category2
+                        "category3" -> food.image=R.drawable.category3
+                    }
+                    foodsList.add(Food_Model(food.text, food.image))
                 }
-                testtext.text= testlist.size.toString()
-                /*val td = dataSnapshot.value as HashMap<String, Boolean>
-
-                val values  = td.values
-
-                for ((key, value) in td) {
-                    testlist.add(key)
-                }
-
-                //testtext.text = values.size.toString()
-                testtext.text= testlist.size.toString()*/
-
 
             }
             override fun onCancelled(error: DatabaseError) {
@@ -70,38 +57,15 @@ class FoodsFragment : Fragment() {
             }
         })
 
-        //testtext.text =testlist.size.toString()
-        val a : String = "Test"
-        /*foodsList.add(Food_Model(a, R.drawable.i1))
-        foodsList.add(Food_Model(a, R.drawable.i1))
-        foodsList.add(Food_Model(a, R.drawable.i1))
-        foodsList.add(Food_Model(a, R.drawable.i1))
-        foodsList.add(Food_Model(a, R.drawable.i1))
-        foodsList.add(Food_Model(a, R.drawable.i1))
-        foodsList.add(Food_Model(a, R.drawable.i1))
-        foodsList.add(Food_Model(a, R.drawable.i1))
-        foodsList.add(Food_Model(a, R.drawable.i1))
-        foodsList.add(Food_Model(a, R.drawable.i1))
-        foodsList.add(Food_Model(a, R.drawable.i1))
-        foodsList.add(Food_Model(a, R.drawable.i1))*/
 
-        for (i in 1..10){
-            val food = Food_Model()
-            food.text="Test$i"
-            food.image=R.drawable.i1
-            foodsList.add(food)
-
-        }
-
-
-        /*val adapter = RecyclerViewGridAdapter2(foodsList)
+        val adapter = RecyclerViewGridAdapter2(foodsList)
 
         val recycler: RecyclerView = view.findViewById(R.id.recycle_view_fragment_foods)
 
         recycler.layoutManager = GridLayoutManager(context, 2)
         recycler.adapter = adapter
 
-        recycler.addOnItemTouchListener(RecyclerTouchListener(getActivity()!!.getApplicationContext(), recycler, object : RecyclerTouchListener.ClickListener {
+        recycler.addOnItemTouchListener(RecyclerTouchListener(activity!!.applicationContext, recycler, object : RecyclerTouchListener.ClickListener {
             override fun onClick(view: View, position: Int) {
                 Toast.makeText(activity, "Click : $position", Toast.LENGTH_SHORT).show()
             }
@@ -109,7 +73,7 @@ class FoodsFragment : Fragment() {
             override fun onLongClick(view: View?, position: Int) {
                 Toast.makeText(activity, "LongPress : $position", Toast.LENGTH_SHORT).show()
             }
-        }))*/
+        }))
 
         return view
     }

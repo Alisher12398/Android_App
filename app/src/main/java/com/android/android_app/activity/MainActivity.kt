@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("message")
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+        val myRef = FirebaseDatabase.getInstance().getReference("message")
         myRef.setValue("Hello, World!");
 
 
