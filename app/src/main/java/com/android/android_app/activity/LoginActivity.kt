@@ -40,6 +40,11 @@ class LoginActivity : BaseActivity() {
 
         auth = FirebaseAuth.getInstance()
 
+        if (auth.currentUser!=null){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
         button_register.setOnClickListener{
             createAccount(edittext_email.text.toString(), edittext_password.text.toString())
         }
