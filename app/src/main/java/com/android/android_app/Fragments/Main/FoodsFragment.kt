@@ -40,7 +40,7 @@ class FoodsFragment : Fragment() {
 
         val foodsList = ArrayList<Food_Model>()
 
-        reference_category.addValueEventListener(object : ValueEventListener {
+        /*reference_category.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 foodsList.clear()
@@ -59,7 +59,7 @@ class FoodsFragment : Fragment() {
             override fun onCancelled(error: DatabaseError) {
                 // Failed to read value
             }
-        })
+        })*/
 
 
         val adapter = RecyclerViewGridAdapter2(foodsList)

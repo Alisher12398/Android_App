@@ -88,7 +88,7 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
                     table_foods_id_category_f + " INTEGER," +
                     table_foods_name + " VARCHAR, " +
                     table_foods_description + " VARCHAR, " +
-                    " FOREIGN KEY ("+table_foods_id_category_f+") REFERENCES "+table_category+"("+table_category_id_category+")" +
+                    " FOREIGN KEY ("+table_foods_id_category_f+") REFERENCES "+table_category+"("+table_category_id_category+") ON UPDATE CASCADE " +
                     ");"
             )
         db.execSQL(sql_create_table_foods)
@@ -140,6 +140,23 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
             )
         db.execSQL(sql_create_table_favorites)
 
+    }
+
+    fun deletefromtable(name : String){
+        val db = writableDatabase
+        val sql = "DELETE FROM $name;"
+        db.execSQL(sql)
+    }
+
+    fun getcategotyid(name : String) : Int{
+        val db = writableDatabase
+        val sql = "SELECT * FROM category WHERE name LIKE '$name';"
+        val c : Cursor = db.rawQuery(sql, null)
+        c.moveToFirst()
+        var s : Int = 2
+
+        s = c.getInt(c.getColumnIndex("id_category"))
+        return s
     }
 
 

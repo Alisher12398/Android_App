@@ -1,6 +1,7 @@
 package com.android.android_app.activity
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.internal.BottomNavigationItemView
@@ -12,11 +13,11 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import android.widget.Toolbar
+import com.android.android_app.DBHelper
 import com.android.android_app.Fragments.Main.*
 import com.android.android_app.R
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-
+import com.android.android_app.model.Food_Model
+import com.google.firebase.database.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -40,6 +41,17 @@ class MainActivity : AppCompatActivity() {
         bottom_navigation.disableShiftMode()
 
         //https://www.youtube.com/watch?v=C0D7zzIUBec
+        val products_ref = FirebaseDatabase.getInstance().reference
+        val reference_category = products_ref.child("products")
+
+        val db = DBHelper(this)
+        val sqlitedatabase = db.writableDatabase
+        val insertValues = ContentValues()
+        insertValues.put("name", "Name1")
+        sqlitedatabase.insert("products", null, insertValues)
+        sqlitedatabase.close()
+
+
 
 
 
