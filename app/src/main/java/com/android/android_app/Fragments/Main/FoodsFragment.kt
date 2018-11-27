@@ -14,6 +14,7 @@ import android.widget.Toast
 import com.android.android_app.Adapter.RecyclerTouchListener
 import com.android.android_app.Adapter.RecyclerViewGridAdapter2
 import com.android.android_app.R
+import com.android.android_app.activity.MainActivity
 import com.android.android_app.model.Food_Model
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
@@ -22,6 +23,9 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.util.*
 import kotlin.collections.HashMap
+
+
+
 
 
 class FoodsFragment : Fragment() {
@@ -65,9 +69,13 @@ class FoodsFragment : Fragment() {
         recycler.layoutManager = GridLayoutManager(context, 2)
         recycler.adapter = adapter
 
+        /*val foodsFragment : Fragment = FoodsFragment()
+        val foodsFragment_2 : Fragment = FoodsFragment_2()*/
+
         recycler.addOnItemTouchListener(RecyclerTouchListener(activity!!.applicationContext, recycler, object : RecyclerTouchListener.ClickListener {
             override fun onClick(view: View, position: Int) {
                 Toast.makeText(activity, "Click : $position", Toast.LENGTH_SHORT).show()
+                (activity as MainActivity).changeToFragment_2(position)
             }
 
             override fun onLongClick(view: View?, position: Int) {

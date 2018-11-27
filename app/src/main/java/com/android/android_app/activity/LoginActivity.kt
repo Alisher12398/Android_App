@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.android.android_app.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity() {
@@ -31,6 +32,7 @@ class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        //FirebaseDatabase.getInstance().setPersistenceEnabled(true)
 
         val button_login = findViewById<Button>(R.id.button_login)
         val button_register = findViewById<Button>(R.id.button_register)
