@@ -11,7 +11,7 @@ import com.android.android_app.activity.MainActivity
 class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
 
     companion object {
-        val DATABASE_NAME = "5"
+        val DATABASE_NAME = "7"
         val TABLE_NAME_1 = "products"
         val TABLE_NAME_2 = "cart"
         val TABLE_NAME_3 = "category"
@@ -173,8 +173,30 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
     fun replacenameinproducts(id : String, name : String){
         val db = writableDatabase
-        val sql = "UPDATE products SET name = '$name' WHERE id_product = '$id'"
+        val sql = "UPDATE products SET name = '$name' WHERE id_product = '$id';"
         db.execSQL(sql)
+    }
+
+    fun checkproductidsindb(list : ArrayList<String>){
+        val db = writableDatabase
+        val sql = "SELECT id_product FROM products;"
+        val cursor : Cursor = db.rawQuery(sql, null)
+
+        val current_ids_in_db = ArrayList<String>()
+        current_ids_in_db.clear()
+        if (cursor.moveToFirst()) {
+                do {
+                    current_ids_in_db.add(cursor.getString(cursor.getColumnIndex("id_product")))
+                } while (cursor.moveToNext())
+            }
+        cursor.close()
+
+        for (a in current_ids_in_db){
+            if (!list.contains(a)){
+                val sql = "DELETE FROM products WHERE id_product = '$a';"
+                db.execSQL(sql)
+            }
+        }
     }
 
 

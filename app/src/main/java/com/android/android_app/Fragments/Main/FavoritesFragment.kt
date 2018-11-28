@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class FavoritesFragment : Fragment() {
 
@@ -114,14 +115,16 @@ class FavoritesFragment : Fragment() {
 
 
         })*/
-
+        val current_ids = ArrayList<String>()
         products_ref.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
 
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-               /* testlist.clear()
+               current_ids.clear()
+
+                /* testlist.clear()
                 val db = DBHelper(activity as MainActivity)
                 db.deletefromtable("products")
                 val td = dataSnapshot.value as HashMap<String, Boolean>
@@ -145,18 +148,25 @@ class FavoritesFragment : Fragment() {
                         insertValues.put("id_product", key)
                         insertValues.put("name", value)
                         sqlitedatabase.insert("products", null, insertValues)
-                        val toast = Toast.makeText(activity as MainActivity, "$value $key", Toast.LENGTH_SHORT)
+                        /*val toast = Toast.makeText(activity as MainActivity, "$value $key", Toast.LENGTH_SHORT)
                         toast.setGravity(Gravity.BOTTOM, 0, 150)
-                        toast.show()
+                        toast.show()*/
                     }
 
                     if (db.checkestlivproducts(key)){
                         db.replacenameinproducts(key, value)
-                        Toast.makeText(activity as MainActivity, "$value $key", Toast.LENGTH_LONG).show()
+                        //Toast.makeText(activity as MainActivity, "$value $key", Toast.LENGTH_LONG).show()
                     }
                     sqlitedatabase.close()
 
+                    current_ids.add(key)
+
                 }
+                db.checkproductidsindb(current_ids)
+                /*val i2 =db.checkproductidsindb(current_ids)
+                val toast = Toast.makeText(activity as MainActivity, "$i2 ${current_ids.size}", Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.BOTTOM, 0, 300)
+                toast.show()*/
             }
 
 
