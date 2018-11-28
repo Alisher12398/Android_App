@@ -5,11 +5,13 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.widget.Toast
+import com.android.android_app.activity.MainActivity
 
 class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
 
     companion object {
-        val DATABASE_NAME = "omegala1_kbtu_android"
+        val DATABASE_NAME = "5"
         val TABLE_NAME_1 = "products"
         val TABLE_NAME_2 = "cart"
         val TABLE_NAME_3 = "category"
@@ -66,7 +68,7 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         val sql_create_table_products = (
             "CREATE TABLE " +
                     table_products + "(" +
-                    table_products_id_product + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    table_products_id_product + " VARCHAR PRIMARY KEY NOT NULL, " +
                     table_products_name + " VARCHAR " +
                     ");"
             )
@@ -75,7 +77,7 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         val sql_create_table_category = (
             "CREATE TABLE " +
                     table_category + "(" +
-                    table_category_id_category + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    table_category_id_category + " VARCHAR PRIMARY KEY NOT NULL, " +
                     table_category_name + " VARCHAR " +
                     ");"
             )
@@ -84,8 +86,8 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         val sql_create_table_foods = (
             "CREATE TABLE " +
                     table_foods + "(" +
-                    table_foods_id_food + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    table_foods_id_category_f + " INTEGER," +
+                    table_foods_id_food + " VARCHAR PRIMARY KEY NOT NULL, " +
+                    table_foods_id_category_f + " VARCHAR," +
                     table_foods_name + " VARCHAR, " +
                     table_foods_description + " VARCHAR, " +
                     " FOREIGN KEY ("+table_foods_id_category_f+") REFERENCES "+table_category+"("+table_category_id_category+") ON UPDATE CASCADE " +
@@ -96,7 +98,7 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         val sql_create_table_recipes = (
             "CREATE TABLE " +
                     table_recipes + "(" +
-                    table_recipes_id_recipe + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    table_recipes_id_recipe + " INTEGER PRIMARY KEY NOT NULL, " +
                     table_recipes_id_food_f + " INTEGER," +
                     table_recipes_id_product_f + " INTEGER," +
                     table_recipes_amount + " INTEGER, " +
@@ -157,6 +159,22 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
         s = c.getInt(c.getColumnIndex("id_category"))
         return s
+    }
+
+    fun checkestlivproducts(id : String) : Boolean{
+        val db = writableDatabase
+        val sql = "SELECT id_product FROM products WHERE id_product LIKE '$id';"
+        val c : Cursor = db.rawQuery(sql, null)
+
+        if (c.count==1) return true
+        if (c.count==0) return false
+        return false
+    }
+
+    fun replacenameinproducts(id : String, name : String){
+        val db = writableDatabase
+        val sql = "UPDATE products SET name = '$name' WHERE id_product = '$id'"
+        db.execSQL(sql)
     }
 
 

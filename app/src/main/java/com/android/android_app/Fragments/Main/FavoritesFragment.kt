@@ -4,10 +4,12 @@ package com.android.android_app.Fragments.Main
 import android.content.ContentValues
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.android.android_app.DBHelper
 
 import com.android.android_app.R
@@ -37,7 +39,7 @@ class FavoritesFragment : Fragment() {
         var i=0
         val testlist = ArrayList<String>()
 
-        foods22_ref.addValueEventListener(object : ValueEventListener {
+        /*foods22_ref.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
 
@@ -62,7 +64,7 @@ class FavoritesFragment : Fragment() {
                     sqlitedatabase.close()
                     testtext.text="${food.name} \n ${food.description} \n ${food.category} "
 
-                    /*for ((key, value) in td) {
+                    *//*for ((key, value) in td) {
                         testlist.add(key)
                         val sqlitedatabase = db.writableDatabase
                         val insertValues = ContentValues()
@@ -71,11 +73,11 @@ class FavoritesFragment : Fragment() {
                         sqlitedatabase.close()
                     }
 
-                    foodsList.add(Food_Model(food.text, food.image))*/
+                    foodsList.add(Food_Model(food.text, food.image))*//*
                 }
 
 
-                /*for ((key, value) in td) {
+                *//*for ((key, value) in td) {
                     testlist.add(key)
                     val sqlitedatabase = db.writableDatabase
                     val insertValues = ContentValues()
@@ -83,7 +85,7 @@ class FavoritesFragment : Fragment() {
                     sqlitedatabase.insert("category", null, insertValues)
                     sqlitedatabase.close()
                 }
-                testtext.text = testlist.size.toString()*/
+                testtext.text = testlist.size.toString()*//*
             }
 
 
@@ -111,7 +113,7 @@ class FavoritesFragment : Fragment() {
             }
 
 
-        })
+        })*/
 
         products_ref.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -119,7 +121,7 @@ class FavoritesFragment : Fragment() {
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                testlist.clear()
+               /* testlist.clear()
                 val db = DBHelper(activity as MainActivity)
                 db.deletefromtable("products")
                 val td = dataSnapshot.value as HashMap<String, Boolean>
@@ -131,8 +133,30 @@ class FavoritesFragment : Fragment() {
                     insertValues.put("name", key)
                     sqlitedatabase.insert("products", null, insertValues)
                     sqlitedatabase.close()
+                }*/
+                val db = DBHelper(activity as MainActivity)
+                val td = dataSnapshot.value as HashMap<String, String>
+
+                for ((key, value) in td) {
+                    val sqlitedatabase = db.writableDatabase
+
+                    if (!db.checkestlivproducts(key)){
+                        val insertValues = ContentValues()
+                        insertValues.put("id_product", key)
+                        insertValues.put("name", value)
+                        sqlitedatabase.insert("products", null, insertValues)
+                        val toast = Toast.makeText(activity as MainActivity, "$value $key", Toast.LENGTH_SHORT)
+                        toast.setGravity(Gravity.BOTTOM, 0, 150)
+                        toast.show()
+                    }
+
+                    if (db.checkestlivproducts(key)){
+                        db.replacenameinproducts(key, value)
+                        Toast.makeText(activity as MainActivity, "$value $key", Toast.LENGTH_LONG).show()
+                    }
+                    sqlitedatabase.close()
+
                 }
-                //testtext.text = testlist.size.toString()
             }
 
 
