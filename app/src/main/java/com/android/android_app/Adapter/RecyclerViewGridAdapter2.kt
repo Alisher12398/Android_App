@@ -26,6 +26,10 @@ class RecyclerViewGridAdapter2(var persons:List<Category_model>):RecyclerView.Ad
         }
     }
 
+    fun geId(position: Int): String {
+        return persons[position].id_category
+    }
+
     override fun onCreateViewHolder(holder: ViewGroup, position: Int): ViewHolder {
         val inflater = LayoutInflater.from(holder.context)
         val view = inflater.inflate(R.layout.recycler_view_item, holder, false)

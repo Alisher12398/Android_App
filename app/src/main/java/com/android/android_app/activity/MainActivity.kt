@@ -2,6 +2,7 @@ package com.android.android_app.activity
 
 import android.annotation.SuppressLint
 import android.content.ContentValues
+import android.database.Cursor
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.internal.BottomNavigationItemView
@@ -31,6 +32,67 @@ class MainActivity : AppCompatActivity() {
     val settingsFragment : Fragment = SettingsFragment()
     val foodsFragment_2 : Fragment = FoodsFragment_2()
 
+    var choosedCategory : String = ""
+
+    fun getchoosedCategory() : String{
+        return  choosedCategory
+    }
+
+    fun setchoosedCategory(choosedCategory_from_fragment : String){
+        choosedCategory = choosedCategory_from_fragment
+    }
+
+
+    fun checkestlivfoods(id : String) : Boolean{
+        val db = DBHelper(this@MainActivity)
+        val sqlitedatabase = db.writableDatabase
+
+        val sql = "SELECT id_food FROM foods WHERE id_food LIKE '$id';"
+        val c : Cursor = sqlitedatabase.rawQuery(sql, null)
+
+        if (c.count==1) return true
+        if (c.count==0) return false
+        return false
+    }
+
+    fun inserttoDBfoods (){
+        val db = DBHelper(this@MainActivity)
+        val sqlitedatabase = db.writableDatabase
+        for (i in 1..4){
+
+            val insertValues = ContentValues()
+            insertValues.put("id_food", "id_food_$i")
+            insertValues.put("id_category", "category_id_1")
+            insertValues.put("name", "Food $i (1)")
+            insertValues.put("description", "Tasty food $i")
+            sqlitedatabase.insert("foods", null, insertValues)
+
+        }
+
+        for (i in 5..8){
+
+            val insertValues2 = ContentValues()
+            insertValues2.put("id_food", "id_food_$i")
+            insertValues2.put("id_category", "category_id_2")
+            insertValues2.put("name", "Food $i (2)")
+            insertValues2.put("description", "Tasty food $i")
+            sqlitedatabase.insert("foods", null, insertValues2)
+
+        }
+
+        for (i in 9..12){
+
+            val insertValues3 = ContentValues()
+            insertValues3.put("id_food", "id_food_$i")
+            insertValues3.put("id_category", "category_id_3")
+            insertValues3.put("name", "Food $i (3)")
+            insertValues3.put("description", "Tasty food $i")
+            sqlitedatabase.insert("foods", null, insertValues3)
+
+        }
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -43,13 +105,9 @@ class MainActivity : AppCompatActivity() {
         bottom_navigation.disableShiftMode()
 
 
-
-
-
-
-
-
-
+        if (!checkestlivfoods("id_food_1")){
+            inserttoDBfoods()
+        }
 
 
         val dbref = FirebaseDatabase.getInstance().reference
@@ -58,6 +116,11 @@ class MainActivity : AppCompatActivity() {
         val foods22_ref = dbref.child("foods")
         var i=0
         val testlist = ArrayList<String>()
+
+
+
+
+
 
 
 
@@ -241,7 +304,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().add(R.id.frame_layout, favoritesFragment).hide(favoritesFragment).commit()
         supportFragmentManager.beginTransaction().add(R.id.frame_layout, cartFragment).hide(cartFragment).commit()
         supportFragmentManager.beginTransaction().add(R.id.frame_layout, settingsFragment).hide(settingsFragment).commit()
-        supportFragmentManager.beginTransaction().add(R.id.frame_layout, foodsFragment_2).hide(foodsFragment_2).commit()
 
         var active = mainFragment
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
@@ -349,7 +411,8 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun changeToFragment_2(position : Int){
-       supportFragmentManager.beginTransaction().hide(foodsFragment).show(foodsFragment_2).commit()
+    fun changeToFragment_2(){
+        supportFragmentManager.beginTransaction().add(R.id.frame_layout, foodsFragment_2).hide(foodsFragment_2).commit()
+        supportFragmentManager.beginTransaction().hide(foodsFragment).show(foodsFragment_2).commit()
     }
 }
