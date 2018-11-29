@@ -41,8 +41,9 @@ class FoodsFragment_2 : Fragment() {
 
         recycler.addOnItemTouchListener(RecyclerTouchListener(activity!!.applicationContext, recycler, object : RecyclerTouchListener.ClickListener {
             override fun onClick(view: View, position: Int) {
-                Toast.makeText(activity, "Click : $position", Toast.LENGTH_SHORT).show()
-                (activity as MainActivity).changeToFragment_2()
+                val id = adapter.getId(position)
+                (activity as MainActivity).setchoosedCategory(id)
+                (activity as MainActivity).changeToFragment_3()
             }
 
             override fun onLongClick(view: View?, position: Int) {

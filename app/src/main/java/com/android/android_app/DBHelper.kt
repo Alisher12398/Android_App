@@ -13,7 +13,7 @@ import com.android.android_app.model.Food_model2
 class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
 
     companion object {
-        val DATABASE_NAME = "15"
+        val DATABASE_NAME = "16"
         val TABLE_NAME_1 = "products"
         val TABLE_NAME_2 = "cart"
         val TABLE_NAME_3 = "category"
@@ -327,6 +327,24 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         }
         cursor.close()
         return categoryList
+    }
+
+    fun parceDBtoListfood3(id : String): Food_model2 {
+
+        val db = writableDatabase
+        val selectQuery = "SELECT * FROM foods WHERE id_food='$id'"
+        val cursor = db.rawQuery(selectQuery, null)
+
+        cursor.moveToFirst()
+
+        val id_food = cursor.getString(cursor.getColumnIndex("id_food"))
+        val category = cursor.getString(cursor.getColumnIndex("id_category"))
+        val name = cursor.getString(cursor.getColumnIndex("name"))
+        val description = cursor.getString(cursor.getColumnIndex("description"))
+        val food = Food_model2(id_food, category, name, description)
+
+        cursor.close()
+        return food
     }
 
 

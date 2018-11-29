@@ -26,7 +26,7 @@ class RecyclerViewGridAdapter2(var persons:List<Category_model>):RecyclerView.Ad
         }
     }
 
-    fun geId(position: Int): String {
+    fun getId(position: Int): String {
         return persons[position].id_category
     }
 

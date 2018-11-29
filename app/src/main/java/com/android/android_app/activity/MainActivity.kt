@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     val mainFragment : Fragment = MainFragment()
     val settingsFragment : Fragment = SettingsFragment()
     val foodsFragment_2 : Fragment = FoodsFragment_2()
-
+    val foodsFragment_3 : Fragment = FoodsFragment_3()
     var choosedCategory : String = ""
 
     fun getchoosedCategory() : String{
@@ -304,7 +304,8 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().add(R.id.frame_layout, favoritesFragment).hide(favoritesFragment).commit()
         supportFragmentManager.beginTransaction().add(R.id.frame_layout, cartFragment).hide(cartFragment).commit()
         supportFragmentManager.beginTransaction().add(R.id.frame_layout, settingsFragment).hide(settingsFragment).commit()
-
+        supportFragmentManager.beginTransaction().remove(foodsFragment_2).commit()
+        supportFragmentManager.beginTransaction().remove(foodsFragment_3).commit()
         var active = mainFragment
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -316,6 +317,8 @@ class MainActivity : AppCompatActivity() {
                     toolbar.menu.clear()
                     toolbar.inflateMenu(R.menu.toolbar_menu_2)
                     toolbar.setBackgroundColor(resources.getColor(R.color.colorMenu))
+                    supportFragmentManager.beginTransaction().remove(foodsFragment_2).commit()
+                    supportFragmentManager.beginTransaction().remove(foodsFragment_3).commit()
 
                 }
                 R.id.action_fragment_favorites -> {
@@ -326,6 +329,8 @@ class MainActivity : AppCompatActivity() {
                     toolbar.menu.clear()
                     toolbar.inflateMenu(R.menu.toolbar_menu)
                     toolbar.setBackgroundColor(resources.getColor(R.color.colorMenu))
+                    supportFragmentManager.beginTransaction().remove(foodsFragment_2).commit()
+                    supportFragmentManager.beginTransaction().remove(foodsFragment_3).commit()
                 }
                 R.id.action_fragment_main -> {
                     supportFragmentManager.beginTransaction().hide(foodsFragment_2).commit()
@@ -335,6 +340,8 @@ class MainActivity : AppCompatActivity() {
                     toolbar.menu.clear()
                     toolbar.inflateMenu(R.menu.toolbar_menu)
                     toolbar.setBackgroundColor(resources.getColor(R.color.colorMenu))
+                    supportFragmentManager.beginTransaction().remove(foodsFragment_2).commit()
+                    supportFragmentManager.beginTransaction().remove(foodsFragment_3).commit()
                 }
                 R.id.action_fragment_cart -> {
                     supportFragmentManager.beginTransaction().hide(foodsFragment_2).commit()
@@ -344,6 +351,8 @@ class MainActivity : AppCompatActivity() {
                     toolbar.menu.clear()
                     toolbar.inflateMenu(R.menu.toolbar_menu)
                     toolbar.setBackgroundColor(resources.getColor(R.color.colorMenu))
+                    supportFragmentManager.beginTransaction().remove(foodsFragment_2).commit()
+                    supportFragmentManager.beginTransaction().remove(foodsFragment_3).commit()
                 }
                 R.id.action_fragment_settings -> {
                     supportFragmentManager.beginTransaction().hide(foodsFragment_2).commit()
@@ -352,6 +361,8 @@ class MainActivity : AppCompatActivity() {
                     toolbar.setTitle(R.string.main_activity_fragment_title_settings)
                     toolbar.menu.clear()
                     toolbar.setBackgroundColor(resources.getColor(R.color.black))
+                    supportFragmentManager.beginTransaction().remove(foodsFragment_2).commit()
+                    supportFragmentManager.beginTransaction().remove(foodsFragment_3).commit()
                 }
             }
             return@setOnNavigationItemSelectedListener true
@@ -414,5 +425,9 @@ class MainActivity : AppCompatActivity() {
     fun changeToFragment_2(){
         supportFragmentManager.beginTransaction().add(R.id.frame_layout, foodsFragment_2).hide(foodsFragment_2).commit()
         supportFragmentManager.beginTransaction().hide(foodsFragment).show(foodsFragment_2).commit()
+    }
+    fun changeToFragment_3(){
+        supportFragmentManager.beginTransaction().add(R.id.frame_layout, foodsFragment_3).hide(foodsFragment_3).commit()
+        supportFragmentManager.beginTransaction().hide(foodsFragment_2).show(foodsFragment_3).commit()
     }
 }

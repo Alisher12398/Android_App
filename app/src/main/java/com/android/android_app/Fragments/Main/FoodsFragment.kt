@@ -77,7 +77,7 @@ class FoodsFragment : Fragment() {
         recycler.addOnItemTouchListener(RecyclerTouchListener(activity!!.applicationContext, recycler, object : RecyclerTouchListener.ClickListener {
             override fun onClick(view: View, position: Int) {
 
-                val id = adapter.geId(position)
+                val id = adapter.getId(position)
                 (activity as MainActivity).setchoosedCategory(id)
                 (activity as MainActivity).changeToFragment_2()
             }

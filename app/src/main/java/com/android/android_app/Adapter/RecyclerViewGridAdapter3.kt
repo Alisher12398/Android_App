@@ -17,7 +17,8 @@ class RecyclerViewGridAdapter3(var persons:List<Food_model2>):RecyclerView.Adapt
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.title.text = persons[position].name
-        when(persons[position].id_food){
+        holder.image.setImageResource(R.drawable.category2)
+        /*when(persons[position].id_food){
             "food_id_1" ->  holder.image.setImageResource(R.drawable.food1)
             "food_id_2" ->  holder.image.setImageResource(R.drawable.food1)
             "food_id_3" ->  holder.image.setImageResource(R.drawable.food1)
@@ -30,11 +31,7 @@ class RecyclerViewGridAdapter3(var persons:List<Food_model2>):RecyclerView.Adapt
             "food_id_10" ->  holder.image.setImageResource(R.drawable.food3)
             "food_id_11" ->  holder.image.setImageResource(R.drawable.food3)
             "food_id_12" ->  holder.image.setImageResource(R.drawable.food3)
-
-
-
-
-        }
+        }*/
        // holder.date.text = persons[position].text
         //holder.image.setImageResource(persons[position].getImageUrl())
     }
@@ -46,6 +43,10 @@ class RecyclerViewGridAdapter3(var persons:List<Food_model2>):RecyclerView.Adapt
     }
     override fun getItemViewType(position: Int): Int {
         return super.getItemViewType(position)
+    }
+
+    fun getId(position: Int): String {
+        return persons[position].id_food
     }
 
 
