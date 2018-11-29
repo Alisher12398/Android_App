@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.android.android_app.Adapter.RecyclerTouchListener
 import com.android.android_app.Adapter.RecyclerViewGridAdapter2
+import com.android.android_app.DBHelper
 import com.android.android_app.R
 import com.android.android_app.activity.MainActivity
 import com.android.android_app.model.Food_Model
@@ -38,8 +39,6 @@ class FoodsFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_foods, container, false)
 
-        val foodsList = ArrayList<Food_Model>()
-
         /*reference_category.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
@@ -62,15 +61,18 @@ class FoodsFragment : Fragment() {
         })*/
 
 
-        val adapter = RecyclerViewGridAdapter2(foodsList)
+        val database = DBHelper(activity as MainActivity)
+        val db = database.writableDatabase
+
+        val categoryList = database.parceDBtoListcategory()
+
+
+        val adapter = RecyclerViewGridAdapter2(categoryList)
 
         val recycler: RecyclerView = view.findViewById(R.id.recycle_view_fragment_foods)
 
         recycler.layoutManager = GridLayoutManager(context, 2)
         recycler.adapter = adapter
-
-        /*val foodsFragment : Fragment = FoodsFragment()
-        val foodsFragment_2 : Fragment = FoodsFragment_2()*/
 
         recycler.addOnItemTouchListener(RecyclerTouchListener(activity!!.applicationContext, recycler, object : RecyclerTouchListener.ClickListener {
             override fun onClick(view: View, position: Int) {

@@ -7,18 +7,23 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import com.android.android_app.R
+import com.android.android_app.model.Category_model
 import com.android.android_app.model.Food_Model
+import com.android.android_app.model.Food_model2
 import kotlinx.android.synthetic.main.recycler_view_item.view.*
 
 
-class RecyclerViewGridAdapter2(var persons:List<Food_Model>):RecyclerView.Adapter<RecyclerViewGridAdapter2.ViewHolder>(){
+class RecyclerViewGridAdapter2(var persons:List<Category_model>):RecyclerView.Adapter<RecyclerViewGridAdapter2.ViewHolder>(){
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.title.text = persons[position].text
-        holder.image.setImageResource(persons[position].getImageUrl())
-       // holder.date.text = persons[position].text
-        //holder.image.setImageResource(persons[position].getImageUrl())
+        holder.title.text = persons[position].name
+
+        when(persons[position].id_category){
+            "category_id_1" ->  holder.image.setImageResource(R.drawable.category1)
+            "category_id_2" ->  holder.image.setImageResource(R.drawable.category2)
+            "category_id_3" ->  holder.image.setImageResource(R.drawable.category3)
+        }
     }
 
     override fun onCreateViewHolder(holder: ViewGroup, position: Int): ViewHolder {
