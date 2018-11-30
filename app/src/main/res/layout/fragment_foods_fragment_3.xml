@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+ xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,10 +8,15 @@
     tools:context=".Fragments.Main.FoodsFragment_3"
     android:background="@color/colorWhite">
 
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <ImageView
         android:id="@+id/imageview_fragment_foods_3_image"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="260dp"
         android:src="@drawable/food1"
         android:scaleType="centerCrop"
 
@@ -29,7 +35,7 @@
         android:textStyle="bold"
         android:layout_marginTop="10dp"
         android:maxLines="2"
-        android:gravity="center|top"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageview_fragment_foods_3_image"
@@ -41,9 +47,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:text="Test description"
         android:textSize="23sp"
-
         app:layout_constraintTop_toBottomOf="@id/textview_fragment_foods_3_title"
         />
 
@@ -55,14 +62,16 @@
         app:layout_constraintTop_toBottomOf="@id/textview_fragment_foods_3_description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:textSize="25sp"
         android:textColor="@color/colorWhite"
         android:text="cook today!"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp"
         />
 
 
 
 
-
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

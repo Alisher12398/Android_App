@@ -68,6 +68,8 @@ class MainActivity : AppCompatActivity() {
         return false
     }
 
+    val desc : String = "   Lorem ipsum dolor sit amet, te his vidit inimicus, nobis iuvaret comprehensam at mel. Ullum assum aliquam ad sea. Usu cetero euismod ullamcorper et. Eum ut nibh fastidii fabellas.\n\n" +
+            "   Populo pericula explicari te usu, dicit iracundia eum cu, in duo delectus signiferumque. Malorum rationibus intellegam eu eum, veritus dolorem cum ut. Et qui blandit appetere, usu ad esse reque, ex errem salutandi dissentias usu.\n"
     fun inserttoDBfoods (){
         val db = DBHelper(this@MainActivity)
         val sqlitedatabase = db.writableDatabase
@@ -76,8 +78,9 @@ class MainActivity : AppCompatActivity() {
             val insertValues = ContentValues()
             insertValues.put("id_food", "id_food_$i")
             insertValues.put("id_category", "category_id_1")
-            insertValues.put("name", "Food $i (1)")
-            insertValues.put("description", "Tasty food $i")
+            insertValues.put("name", "Food $i")
+            //insertValues.put("description", "Tasty food $i")
+            insertValues.put("description", desc)
             sqlitedatabase.insert("foods", null, insertValues)
 
         }
@@ -87,8 +90,8 @@ class MainActivity : AppCompatActivity() {
             val insertValues2 = ContentValues()
             insertValues2.put("id_food", "id_food_$i")
             insertValues2.put("id_category", "category_id_2")
-            insertValues2.put("name", "Food $i (2)")
-            insertValues2.put("description", "Tasty food $i")
+            insertValues2.put("name", "Food $i")
+            insertValues2.put("description", desc)
             sqlitedatabase.insert("foods", null, insertValues2)
 
         }
@@ -98,8 +101,8 @@ class MainActivity : AppCompatActivity() {
             val insertValues3 = ContentValues()
             insertValues3.put("id_food", "id_food_$i")
             insertValues3.put("id_category", "category_id_3")
-            insertValues3.put("name", "Food $i (3)")
-            insertValues3.put("description", "Tasty food $i")
+            insertValues3.put("name", "Food $i")
+            insertValues3.put("description", desc)
             sqlitedatabase.insert("foods", null, insertValues3)
 
         }
@@ -404,7 +407,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().add(R.id.frame_layout, mainFragment).commit()
         supportFragmentManager.beginTransaction().add(R.id.frame_layout, foodsFragment).hide(foodsFragment).commit()
         supportFragmentManager.beginTransaction().add(R.id.frame_layout, favoritesFragment).hide(favoritesFragment).commit()
-        supportFragmentManager.beginTransaction().add(R.id.frame_layout, cartFragment).hide(cartFragment).commit()
+        //supportFragmentManager.beginTransaction().add(R.id.frame_layout, cartFragment).hide(cartFragment).commit()
         supportFragmentManager.beginTransaction().add(R.id.frame_layout, settingsFragment).hide(settingsFragment).commit()
         supportFragmentManager.beginTransaction().remove(foodsFragment_2).commit()
         supportFragmentManager.beginTransaction().remove(foodsFragment_3).commit()
@@ -445,7 +448,7 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction().remove(foodsFragment_2).commit()
                     supportFragmentManager.beginTransaction().remove(foodsFragment_3).commit()
                 }
-                R.id.action_fragment_cart -> {
+               /* R.id.action_fragment_cart -> {
                     supportFragmentManager.beginTransaction().hide(foodsFragment_2).commit()
                     supportFragmentManager.beginTransaction().hide(active).show(cartFragment).commit()
                     active = cartFragment
@@ -455,7 +458,7 @@ class MainActivity : AppCompatActivity() {
                     toolbar.setBackgroundColor(resources.getColor(R.color.colorMenu))
                     supportFragmentManager.beginTransaction().remove(foodsFragment_2).commit()
                     supportFragmentManager.beginTransaction().remove(foodsFragment_3).commit()
-                }
+                }*/
                 R.id.action_fragment_settings -> {
                     supportFragmentManager.beginTransaction().hide(foodsFragment_2).commit()
                     supportFragmentManager.beginTransaction().hide(active).show(settingsFragment).commit()

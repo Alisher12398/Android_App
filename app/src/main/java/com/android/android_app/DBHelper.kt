@@ -13,7 +13,7 @@ import com.android.android_app.model.Food_model2
 class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
 
     companion object {
-        val DATABASE_NAME = "19"
+        val DATABASE_NAME = "21"
         val TABLE_NAME_1 = "products"
         val TABLE_NAME_2 = "cart"
         val TABLE_NAME_3 = "category"

@@ -27,8 +27,24 @@ class MainFragment : Fragment() {
 
         textview_fragment_main_title.text = current_food.name
         textview_fragment_main_description.text = current_food.description
-        imageview_fragment_main_image.setImageResource(R.drawable.category3)
+        if (current_food.name.isNotEmpty()) {
+            //imageview_fragment_main_image.setImageResource(R.drawable.category3)
+            when (current_food.id_food) {
+                "id_food_1" -> imageview_fragment_main_image.setImageResource(R.drawable.food1)
+                "id_food_2" -> imageview_fragment_main_image.setImageResource(R.drawable.category1)
+                "id_food_3" -> imageview_fragment_main_image.setImageResource(R.drawable.food1)
+                "id_food_4" -> imageview_fragment_main_image.setImageResource(R.drawable.category1)
+                "id_food_5" -> imageview_fragment_main_image.setImageResource(R.drawable.food2)
+                "id_food_6" -> imageview_fragment_main_image.setImageResource(R.drawable.category2)
+                "id_food_7" -> imageview_fragment_main_image.setImageResource(R.drawable.food2)
+                "id_food_8" -> imageview_fragment_main_image.setImageResource(R.drawable.category2)
+                "id_food_9" -> imageview_fragment_main_image.setImageResource(R.drawable.food3)
+                "id_food_10" -> imageview_fragment_main_image.setImageResource(R.drawable.category3)
+                "id_food_11" -> imageview_fragment_main_image.setImageResource(R.drawable.food3)
+                "id_food_12" -> imageview_fragment_main_image.setImageResource(R.drawable.category3)
+            }
 
+        }
         return view
     }
 

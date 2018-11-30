@@ -17,21 +17,21 @@ class RecyclerViewGridAdapter3(var persons:List<Food_model2>):RecyclerView.Adapt
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.title.text = persons[position].name
-        holder.image.setImageResource(R.drawable.category2)
-        /*when(persons[position].id_food){
-            "food_id_1" ->  holder.image.setImageResource(R.drawable.food1)
-            "food_id_2" ->  holder.image.setImageResource(R.drawable.food1)
-            "food_id_3" ->  holder.image.setImageResource(R.drawable.food1)
-            "food_id_4" ->  holder.image.setImageResource(R.drawable.food1)
-            "food_id_5" ->  holder.image.setImageResource(R.drawable.food2)
-            "food_id_6" ->  holder.image.setImageResource(R.drawable.food2)
-            "food_id_7" ->  holder.image.setImageResource(R.drawable.food2)
-            "food_id_8" ->  holder.image.setImageResource(R.drawable.food2)
-            "food_id_9" ->  holder.image.setImageResource(R.drawable.food3)
-            "food_id_10" ->  holder.image.setImageResource(R.drawable.food3)
-            "food_id_11" ->  holder.image.setImageResource(R.drawable.food3)
-            "food_id_12" ->  holder.image.setImageResource(R.drawable.food3)
-        }*/
+        //holder.image.setImageResource(R.drawable.category2)
+        when(persons[position].id_food){
+            "id_food_1" ->  holder.image.setImageResource(R.drawable.food1)
+            "id_food_2" ->  holder.image.setImageResource(R.drawable.category1)
+            "id_food_3" ->  holder.image.setImageResource(R.drawable.food1)
+            "id_food_4" ->  holder.image.setImageResource(R.drawable.category1)
+            "id_food_5" ->  holder.image.setImageResource(R.drawable.food2)
+            "id_food_6" ->  holder.image.setImageResource(R.drawable.category2)
+            "id_food_7" ->  holder.image.setImageResource(R.drawable.food2)
+            "id_food_8" ->  holder.image.setImageResource(R.drawable.category2)
+            "id_food_9" ->  holder.image.setImageResource(R.drawable.food3)
+            "id_food_10" ->  holder.image.setImageResource(R.drawable.category3)
+            "id_food_11" ->  holder.image.setImageResource(R.drawable.food3)
+            "id_food_12" ->  holder.image.setImageResource(R.drawable.category3)
+        }
        // holder.date.text = persons[position].text
         //holder.image.setImageResource(persons[position].getImageUrl())
     }

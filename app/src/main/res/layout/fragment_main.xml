@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.Main.MainFragment">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardview_fragment_main"
@@ -29,8 +34,7 @@
     <ImageView
         android:id="@+id/imageview_fragment_main_image"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/food1"
+        android:layout_height="260dp"
         android:scaleType="centerCrop"
 
         app:layout_constraintTop_toBottomOf="@id/cardview_fragment_main"
@@ -65,4 +69,5 @@
 
         app:layout_constraintTop_toBottomOf="@id/textview_fragment_main_title"
         />
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

@@ -19,12 +19,12 @@
         android:icon="@drawable/baseline_shopping_cart_white_24"
         android:title="@string/main_activity_fragment_title_main"
         app:showAsAction="ifRoom" />
-    <item
+    <!--<item
         android:id="@+id/action_fragment_cart"
         android:enabled="true"
         android:icon="@drawable/baseline_shopping_cart_white_24"
         android:title="@string/main_activity_fragment_title_cart"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom" />-->
     <item
         android:id="@+id/action_fragment_settings"
         android:enabled="true"

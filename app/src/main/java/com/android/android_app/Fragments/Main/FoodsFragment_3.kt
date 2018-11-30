@@ -42,6 +42,22 @@ class FoodsFragment_3 : Fragment() {
         textview_fragment_foods_3_description.text=choosed_food_object.description
         imageview_fragment_foods_3_image.setImageResource(R.drawable.category1)
 
+        when (choosed_food_object.id_food) {
+            "id_food_1" -> imageview_fragment_foods_3_image.setImageResource(R.drawable.food1)
+            "id_food_2" -> imageview_fragment_foods_3_image.setImageResource(R.drawable.category1)
+            "id_food_3" -> imageview_fragment_foods_3_image.setImageResource(R.drawable.food1)
+            "id_food_4" -> imageview_fragment_foods_3_image.setImageResource(R.drawable.category1)
+            "id_food_5" -> imageview_fragment_foods_3_image.setImageResource(R.drawable.food2)
+            "id_food_6" -> imageview_fragment_foods_3_image.setImageResource(R.drawable.category2)
+            "id_food_7" -> imageview_fragment_foods_3_image.setImageResource(R.drawable.food2)
+            "id_food_8" -> imageview_fragment_foods_3_image.setImageResource(R.drawable.category2)
+            "id_food_9" -> imageview_fragment_foods_3_image.setImageResource(R.drawable.food3)
+            "id_food_10" -> imageview_fragment_foods_3_image.setImageResource(R.drawable.category3)
+            "id_food_11" -> imageview_fragment_foods_3_image.setImageResource(R.drawable.food3)
+            "id_food_12" -> imageview_fragment_foods_3_image.setImageResource(R.drawable.category3)
+        }
+        
+
         button_fragment_foods_3_choose.setOnClickListener {
             (activity as MainActivity).setcurrent_food(choosed_food_object)
             (activity as MainActivity).changetoFragment_main()
