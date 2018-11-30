@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.android.android_app.DBHelper
 
 import com.android.android_app.R
@@ -42,8 +43,9 @@ class FoodsFragment_3 : Fragment() {
         imageview_fragment_foods_3_image.setImageResource(R.drawable.category1)
 
         button_fragment_foods_3_choose.setOnClickListener {
-           // myRef.child("users").child(user!!.uid).child("cart").push().setValue(id)
-
+            (activity as MainActivity).setcurrent_food(choosed_food_object)
+            (activity as MainActivity).changetoFragment_main()
+            Toast.makeText((activity as MainActivity), "Choosed", Toast.LENGTH_SHORT).show()
         }
 
         return view

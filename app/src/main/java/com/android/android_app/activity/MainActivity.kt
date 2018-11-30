@@ -35,13 +35,24 @@ class MainActivity : AppCompatActivity() {
     val foodsFragment_3 : Fragment = FoodsFragment_3()
     var choosedCategory : String = ""
     var active = mainFragment
-
+    var current_food = Food_model2()
     fun getchoosedCategory() : String{
         return  choosedCategory
     }
 
     fun setchoosedCategory(choosedCategory_from_fragment : String){
         choosedCategory = choosedCategory_from_fragment
+    }
+
+    fun setcurrent_food(food : Food_model2) {
+        current_food.name=food.name
+        current_food.id_food=food.id_food
+        current_food.description=food.description
+
+    }
+
+    fun getcurrent_food() : Food_model2{
+        return current_food
     }
 
 
@@ -519,5 +530,10 @@ class MainActivity : AppCompatActivity() {
     fun changeToFragment_3(){
         supportFragmentManager.beginTransaction().add(R.id.frame_layout, foodsFragment_3).hide(foodsFragment_3).commit()
         supportFragmentManager.beginTransaction().hide(foodsFragment_2).show(foodsFragment_3).commit()
+    }
+
+    fun changetoFragment_main(){
+        supportFragmentManager.beginTransaction().detach(mainFragment).attach(mainFragment).commit()
+        supportFragmentManager.beginTransaction().hide(foodsFragment_3).show(foodsFragment).commit()
     }
 }

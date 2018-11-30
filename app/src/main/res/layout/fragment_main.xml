@@ -18,7 +18,7 @@
             android:id="@+id/textview_fragment_main_card"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Test"
+            android:text="Food for today"
             android:textColor="@color/colorWhite"
             android:textSize="36sp"
             android:maxLines="1"
