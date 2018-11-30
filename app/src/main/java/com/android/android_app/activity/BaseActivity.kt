@@ -12,6 +12,7 @@ open class BaseActivity : AppCompatActivity() {
     @VisibleForTesting
     val progressDialog by lazy {
         ProgressDialog(this)
+                //
     }
 
     fun showProgressDialog() {
