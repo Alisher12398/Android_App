@@ -13,7 +13,7 @@ import com.android.android_app.model.Food_model2
 class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
 
     companion object {
-        val DATABASE_NAME = "16"
+        val DATABASE_NAME = "19"
         val TABLE_NAME_1 = "products"
         val TABLE_NAME_2 = "cart"
         val TABLE_NAME_3 = "category"
@@ -100,7 +100,7 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         val sql_create_table_recipes = (
             "CREATE TABLE " +
                     table_recipes + "(" +
-                    table_recipes_id_recipe + " INTEGER PRIMARY KEY NOT NULL, " +
+                    table_recipes_id_recipe + " VARCHAR PRIMARY KEY NOT NULL, " +
                     table_recipes_id_food_f + " INTEGER," +
                     table_recipes_id_product_f + " INTEGER," +
                     table_recipes_amount + " INTEGER, " +
@@ -113,8 +113,7 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         val sql_create_table_users = (
             "CREATE TABLE " +
                     table_users + "(" +
-                    table_users_user_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    table_users_user_uid + " VARCHAR," +
+                    table_users_user_uid + " VARCHAR PRIMARY KEY NOT NULL," +
                     table_users_user_email + " VARCHAR" +
                     ");"
             )
@@ -123,10 +122,10 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         val sql_create_table_cart = (
             "CREATE TABLE " +
                     table_cart + "(" +
-                    table_cart_id_cart + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    table_cart_id_cart + " VARCHAR PRIMARY KEY NOT NULL, " +
                     table_cart_id_user_f + " INTEGER," +
                     table_cart_id_product_f + " INTEGER," +
-                    " FOREIGN KEY ("+table_cart_id_user_f+") REFERENCES "+table_users+"("+table_users_user_id+")," +
+                    " FOREIGN KEY ("+table_cart_id_user_f+") REFERENCES "+table_users+"("+table_users_user_uid+")," +
                     " FOREIGN KEY ("+table_cart_id_product_f+") REFERENCES "+table_products+"("+table_products_id_product+")" +
                     ");"
             )
@@ -136,9 +135,9 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
             "CREATE TABLE " +
                     table_favorites + "(" +
                     table_favorites_id_favorite + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    table_favorites_id_user_f + " INTEGER," +
-                    table_favorites_id_food_f + " INTEGER," +
-                    " FOREIGN KEY ("+table_favorites_id_user_f+") REFERENCES "+table_users+"("+table_users_user_id+")," +
+                    table_favorites_id_user_f + " VARCHAR," +
+                    table_favorites_id_food_f + " VARCHAR," +
+                    " FOREIGN KEY ("+table_favorites_id_user_f+") REFERENCES "+table_users+"("+table_users_user_uid+")," +
                     " FOREIGN KEY ("+table_favorites_id_food_f+") REFERENCES "+table_products+"("+table_foods_id_food+")" +
                     ");"
             )
@@ -310,6 +309,36 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
         return foodList
     }
 
+
+    fun parceDBtoListfavorites(uid: String): List<Food_model2> {
+        val foodList = ArrayList<Food_model2>()
+        val db = writableDatabase
+        val selectQuery = "SELECT * FROM favorites WHERE id_user = '$uid';"
+        val cursor = db.rawQuery(selectQuery, null)
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    val food = Food_model2()
+                    food.id_food = cursor.getString(cursor.getColumnIndex("id_food"))
+                    food.category = cursor.getString(cursor.getColumnIndex("id_user"))
+
+                    val selectQuery2 = "SELECT name FROM foods WHERE id_food = '${cursor.getString(cursor.getColumnIndex("id_food"))}';"
+                    val cursor2 = db.rawQuery(selectQuery2, null)
+                    cursor2.moveToFirst()
+
+                    food.name=cursor2.getString(cursor2.getColumnIndex("name"))
+                    foodList.add(food)
+                } while (cursor.moveToNext())
+            }
+        }
+
+        cursor.close()
+
+        return foodList
+    }
+
+
+
     fun parceDBtoListcategory(): List<Category_model> {
         val categoryList = ArrayList<Category_model>()
         val db = writableDatabase
@@ -353,44 +382,22 @@ class DBHelper(val context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, 
 
 
 
-
-
-
-
-/*
-* val db = DBHelper(this)
-
-        db.readableDatabase
-
-        test_textview_1.text = "test"
-
-        foods = db.parceDBtoList()
-        test_textview_1.text = "id_food: " + foods[0].id_foods.toString()
-        test_textview_2.text = "\nid_product: " +foods[0].id_category.toString()
-        test_textview_3.text = "\nfood_name: " +foods[0].name
-        test_textview_4.text = "\nfood_desc: " +foods[0].description
-*
-* */
-    /*fun parceDBtoList(): List<FoodsModel> {
-        val newsList = ArrayList<FoodsModel>()
+    fun checkestlivfavorites(id_food : String, id_user : String) : Boolean{
         val db = writableDatabase
-        val selectQuery = "SELECT  * FROM food"
-        val cursor = db.rawQuery(selectQuery, null)
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                do {
-                    val food = FoodsModel()
-                    food.id_foods = cursor.getInt(cursor.getColumnIndex("_ID"))
-                    food.id_category = cursor.getInt(cursor.getColumnIndex("id_category"))
-                    food.name = cursor.getString(cursor.getColumnIndex("name"))
-                    food.description = cursor.getString(cursor.getColumnIndex("description"))
-                    newsList.add(food)
-                } while (cursor.moveToNext())
-            }
-        }
-        cursor.close()
-        return newsList
-    }*/
+        val sql = "SELECT id_food FROM favorites WHERE id_food = '$id_food' AND id_user = '$id_user';"
+        val c : Cursor = db.rawQuery(sql, null)
+
+        if (c.count==1) return true
+        if (c.count==0) return false
+        return false
+    }
+/*
+    fun replacenameinfavorites(id_food : String, id_user : String){
+        val db = writableDatabase
+        val sql = "UPDATE category SET name = '$name' WHERE id_category = '$id';"
+        db.execSQL(sql)
+    }
+    */
 
 
     //upgrading the database

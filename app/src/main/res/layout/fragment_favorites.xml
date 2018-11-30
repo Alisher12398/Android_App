@@ -5,10 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.Main.FavoritesFragment">
 
-    <TextView
-        android:id="@+id/testtext2"
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:textSize="30sp"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_view_fragment_favorites"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 
 </FrameLayout> 

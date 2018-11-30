@@ -19,6 +19,7 @@ import com.android.android_app.Fragments.Main.*
 import com.android.android_app.R
 import com.android.android_app.model.Food_Model
 import com.android.android_app.model.Food_model2
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import java.util.HashMap
 
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     val foodsFragment_2 : Fragment = FoodsFragment_2()
     val foodsFragment_3 : Fragment = FoodsFragment_3()
     var choosedCategory : String = ""
+    var active = mainFragment
 
     fun getchoosedCategory() : String{
         return  choosedCategory
@@ -98,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val myRef = FirebaseDatabase.getInstance().getReference("message")
-
+        val user = FirebaseAuth.getInstance().currentUser
         val toolbar = findViewById<android.support.v7.widget.Toolbar>(R.id.toolbar_main_activity)
         val bottom_navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottom_navigation.selectedItemId = R.id.action_fragment_main
@@ -112,6 +114,7 @@ class MainActivity : AppCompatActivity() {
 
         val dbref = FirebaseDatabase.getInstance().reference
         val products_ref = dbref.child("products")
+        val favorites_ref = dbref.child("users").child(user!!.uid).child("favorites")
         val category_ref = dbref.child("category")
         val foods22_ref = dbref.child("foods")
         var i=0
@@ -222,6 +225,94 @@ class MainActivity : AppCompatActivity() {
 
 
         })
+
+
+
+
+
+
+
+
+
+        /*val current_favorites = ArrayList<String>()
+        favorites_ref.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                current_favorites.clear()
+
+                *//* testlist.clear()
+                val db = DBHelper(activity as MainActivity)
+                db.deletefromtable("products")
+                val td = dataSnapshot.value as HashMap<String, Boolean>
+
+                for ((key, value) in td) {
+                    testlist.add(key)
+                    val sqlitedatabase = db.writableDatabase
+                    val insertValues = ContentValues()
+                    insertValues.put("name", key)
+                    sqlitedatabase.insert("products", null, insertValues)
+                    sqlitedatabase.close()
+                }*//*
+                val db = DBHelper(this@MainActivity)
+                val td = dataSnapshot.value as HashMap<String, String>
+
+                for ((key, value) in td) {
+                    val sqlitedatabase = db.writableDatabase
+
+                    if (!db.checkestlivfavorites(value, user.uid)){
+                        val insertValues = ContentValues()
+                        insertValues.put("id_food", value)
+                        insertValues.put("id_user", user.uid)
+                        sqlitedatabase.insert("favorites", null, insertValues)
+
+                    }
+
+                    if (db.checkestlivproducts(value)){
+                        db.replacenameinproducts(value, user.uid)
+                        //Toast.makeText(activity as MainActivity, "$value $key", Toast.LENGTH_LONG).show()
+                    }
+                    sqlitedatabase.close()
+
+                    //current_ids.add(key)
+
+                }
+                //db.checkproductidsindb(current_ids)
+                *//*val i2 =db.checkproductidsindb(current_ids)
+                val toast = Toast.makeText(activity as MainActivity, "$i2 ${current_ids.size}", Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.BOTTOM, 0, 300)
+                toast.show()*//*
+            }
+
+
+        })*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         val current_ids = ArrayList<String>()
         products_ref.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -306,7 +397,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().add(R.id.frame_layout, settingsFragment).hide(settingsFragment).commit()
         supportFragmentManager.beginTransaction().remove(foodsFragment_2).commit()
         supportFragmentManager.beginTransaction().remove(foodsFragment_3).commit()
-        var active = mainFragment
+
         bottom_navigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_fragment_foods -> {
@@ -315,7 +406,7 @@ class MainActivity : AppCompatActivity() {
                     active = foodsFragment
                     toolbar.setTitle(R.string.main_activity_fragment_title_foods)
                     toolbar.menu.clear()
-                    toolbar.inflateMenu(R.menu.toolbar_menu_2)
+                    toolbar.inflateMenu(R.menu.toolbar_menu)
                     toolbar.setBackgroundColor(resources.getColor(R.color.colorMenu))
                     supportFragmentManager.beginTransaction().remove(foodsFragment_2).commit()
                     supportFragmentManager.beginTransaction().remove(foodsFragment_3).commit()
@@ -414,10 +505,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == R.id.action_search2){
-            val toast = Toast.makeText(this, "Text", Toast.LENGTH_SHORT)
-            toast.setGravity(Gravity.BOTTOM, 0, 150)
-            toast.show()
+        if (item?.itemId == R.id.refresh_icon){
+            if (active == cartFragment) Toast.makeText(this, "Main", Toast.LENGTH_LONG).show()
+            supportFragmentManager.beginTransaction().detach(active).attach(active).commit()
         }
         return super.onOptionsItemSelected(item)
     }

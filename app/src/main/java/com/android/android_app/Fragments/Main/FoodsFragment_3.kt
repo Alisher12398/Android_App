@@ -13,6 +13,8 @@ import com.android.android_app.DBHelper
 
 import com.android.android_app.R
 import com.android.android_app.activity.MainActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class FoodsFragment_3 : Fragment() {
 
@@ -24,6 +26,9 @@ class FoodsFragment_3 : Fragment() {
         val textview_fragment_foods_3_title : TextView = view.findViewById(R.id.textview_fragment_foods_3_title)
         val textview_fragment_foods_3_description : TextView = view.findViewById(R.id.textview_fragment_foods_3_description)
         val button_fragment_foods_3_choose : Button = view.findViewById(R.id.button_fragment_foods_3_choose)
+
+        val myRef= FirebaseDatabase.getInstance().reference
+        val user = FirebaseAuth.getInstance().currentUser
 
         val database = DBHelper(activity as MainActivity)
         val db = database.writableDatabase
@@ -37,6 +42,7 @@ class FoodsFragment_3 : Fragment() {
         imageview_fragment_foods_3_image.setImageResource(R.drawable.category1)
 
         button_fragment_foods_3_choose.setOnClickListener {
+           // myRef.child("users").child(user!!.uid).child("cart").push().setValue(id)
 
         }
 

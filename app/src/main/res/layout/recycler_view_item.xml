@@ -3,7 +3,8 @@
     android:layout_width="200dp"
     android:layout_height="200dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorGrey">
+    android:background="@color/colorGrey"
+    android:layout_marginTop="20dp">
 
     <ImageView
         android:id="@+id/imageview_fragment_foods_image"

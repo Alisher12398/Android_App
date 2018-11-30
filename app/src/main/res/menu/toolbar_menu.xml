@@ -5,9 +5,9 @@
 
     <item
         android:title=""
-        android:id="@+id/action_search2"
+        android:id="@+id/refresh_icon"
         app:showAsAction="always"
-        android:icon="@drawable/baseline_search_white_36"
+        android:icon="@drawable/baseline_refresh_white_36"
         >
     </item>
 
